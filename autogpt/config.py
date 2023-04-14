@@ -49,6 +49,7 @@ class Config(metaclass=Singleton):
         self.browse_summary_max_token =  int(os.getenv("BROWSE_SUMMARY_MAX_TOKEN", 300))
 
         self.openai_api_key = os.getenv("OPENAI_API_KEY")
+        self.openai_organization = os.getenv("OPENAI_ORGANIZATION", "")
         self.temperature = float(os.getenv("TEMPERATURE", "1"))
         self.use_azure = os.getenv("USE_AZURE") == 'True'
         self.execute_local_commands = os.getenv('EXECUTE_LOCAL_COMMANDS', 'False') == 'True'
@@ -89,8 +90,11 @@ class Config(metaclass=Singleton):
         # Note that indexes must be created on db 0 in redis, this is not configurable.
 
         self.memory_backend = os.getenv("MEMORY_BACKEND", 'local')
+
         # Initialize the OpenAI API client
         openai.api_key = self.openai_api_key
+        if self.openai_organization != "":
+            openai.organization = self.openai_organization
 
     def get_azure_deployment_id_for_model(self, model: str) -> str:
         """

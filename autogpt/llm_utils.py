@@ -5,8 +5,6 @@ from autogpt.config import Config
 
 cfg = Config()
 
-openai.api_key = cfg.openai_api_key
-
 
 # Overly simple abstraction until we create something better
 # simple retry mechanism when getting a rate error or a bad gateway

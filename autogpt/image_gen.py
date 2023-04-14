@@ -19,8 +19,6 @@ def generate_image(prompt):
     # DALL-E
     if cfg.image_provider == 'dalle':
 
-        openai.api_key = cfg.openai_api_key
-
         response = openai.Image.create(
             prompt=prompt,
             n=1,
